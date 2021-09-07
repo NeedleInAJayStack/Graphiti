@@ -4,7 +4,7 @@ import NIO
 public final class Schema<Resolver, Context> {
     public let schema: GraphQLSchema
 
-    private init(components: [Component<Resolver, Context>]) throws {
+    private init(components: [Component<Resolver, Context>], directives: [GraphQLDirective] = []) throws {
         let typeProvider = SchemaTypeProvider()
         
         for component in components {
@@ -14,6 +14,8 @@ public final class Schema<Resolver, Context> {
         guard let query = typeProvider.query else {
             fatalError("Query type is required.")
         }
+        
+        typeProvider.directives = directives
         
         self.schema = try GraphQLSchema(
             query: query,
