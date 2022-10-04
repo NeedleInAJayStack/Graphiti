@@ -92,6 +92,12 @@ extension GraphQL.Value {
         {
             return .string(value.value)
         }
+        
+        if
+            let value = self as? EnumValue
+        {
+            return .string(value.value)
+        }
 
         if
             let value = self as? ListValue
