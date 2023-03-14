@@ -6,6 +6,46 @@ import XCTest
 class ConnectionSchemaTests: XCTestCase {
     let eventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: 1)
 
+//    func testConnectionUnion() throws {
+//        protocol P: Codable {}
+//
+//        struct Comment: P, Identifiable {
+//            let id: Int
+//            let message: String
+//        }
+//
+//        struct ConnectionTypeResolver {
+//            func comments(context _: NoContext, arguments: PaginationArguments) throws -> Connection<Comment> {
+//                return try [
+//                    Comment(id: 1, message: "Hello"),
+//                    Comment(id: 2, message: "What's up?"),
+//                    Comment(id: 3, message: "Goodbye"),
+//                ].connection(from: arguments)
+//            }
+//        }
+//
+//        let eventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: 1)
+//        let resolver = ConnectionTypeResolver()
+//        let context = NoContext()
+//        let schema = {
+//            try! Schema<ConnectionTypeResolver, NoContext> {
+//                Type(Comment.self) {
+//                    Field("id", at: \.id)
+//                    Field("message", at: \.message)
+//                }
+//                Union(P.self, members: [Comment.self])
+//
+//                ConnectionType(Comment.self) {
+//                    Field("total", at: Connection.total)
+//                }
+//
+//                Query {
+//                    Field("comments", at: ConnectionTypeResolver.comments)
+//                }
+//            }
+//        }()
+//    }
+
     func testConnectionAddFields() throws {
         let schema = try Schema<ConnectionTypeResolver, NoContext> {
             Type(Comment.self) {
