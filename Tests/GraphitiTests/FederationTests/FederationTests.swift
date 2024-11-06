@@ -26,6 +26,10 @@ final class FederationTests: XCTestCase {
     // Test Queries from https://github.com/apollographql/apollo-federation-subgraph-compatibility/blob/main/COMPATIBILITY.md
 
     func testServiceQuery() throws {
+        try XCTAssertEqual(
+            printSchema(schema: api.schema.schema),
+            loadSDL()
+        )
         try XCTAssertEqual(execute(request: query("service")), GraphQLResult(data: [
             "_service": [
                 "sdl": Map(stringLiteral: loadSDL()),
